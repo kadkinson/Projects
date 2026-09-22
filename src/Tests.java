@@ -1,17 +1,62 @@
+import java.util.Scanner;
 public class Tests {
-    public static void main(String[] args)
-    {
-        //create/declare variable for 3 test scores
-        double testScore1 = 75.3;
-        double testScore2 = 96.5;
-        double testScore3 = 67.2;
-        //calculate average of test scores
-        //what is the formula? (a + b + c) / 3
-        double average = (testScore1 + testScore2 + testScore3) / 3;
-        //display 3 test scores and their average
-        System.out.println("Test score 1: " + testScore1);
-        System.out.println("Test score 2: " + testScore2);
-        System.out.println("Test score 3: " + testScore3);
-        System.out.println("The average of 3 test scores is: " + average);
+
+    // Fields
+    private double ave;
+    private int count;
+    private int score;
+
+    // Constructor
+    public Tests() {
+        this.ave = 0;
+        this.count = 0;
+        this.score = 0;
+    }
+
+    // Read only accessors
+    public double getAve() {
+        return this.ave;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    // Score has getter and setter
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int newScore) {
+        this.score = newScore;
+    }
+
+    // Read test scores from user, computes average,
+    // and stores the results into this.ave and this.count
+    public void getAverage() {
+        Scanner scnr = new Scanner(System.in);
+
+        int sum = 0;
+        int scoreCount = 0;
+
+        System.out.print("Please enter test scores (type -1 to quit): ");
+        int testScore = scnr.nextInt();
+
+        while (testScore != -1) {
+            sum += testScore;
+            scoreCount++;
+            System.out.print("Please enter test scores (type -1 to quit): ");
+            testScore = scnr.nextInt();
+        }
+
+        this.count = scoreCount;
+        this.ave = (double) sum / this.count;
+    }
+
+    @Override
+    public String toString() {
+        String output = "The average of the " + this.getCount() + " scores entered is "
+                + String.format("%.2f", this.getAve()) + ".";
+        return output;
     }
 }
